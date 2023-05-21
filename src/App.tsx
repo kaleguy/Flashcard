@@ -4,9 +4,7 @@ import "./App.scss";
 
 function App() {
   const [sidebarIsOpen, setSidebarIsOpen] = useState<boolean>(true);
-  useEffect(() => {
-    console.log("asikjdasjdlkasjd");
-  }, [sidebarIsOpen]);
+
   return (
     <div className="App">
       <div className="flex horizontal fill">
@@ -18,7 +16,7 @@ function App() {
               setSidebarIsOpen(!sidebarIsOpen);
             }}
           >
-            Test
+            Close Sidebar
           </button>
         </section>
       </div>
