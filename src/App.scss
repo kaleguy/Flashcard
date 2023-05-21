@@ -1,0 +1,27 @@
+#root {
+  padding: 1.5rem;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.App {
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.horizontal {
+  flex-direction: row;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.fill {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
