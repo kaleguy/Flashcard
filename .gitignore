@@ -8,7 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-# extract_dir
+extract_dir
 dist
 dist-ssr
 dist-electron
