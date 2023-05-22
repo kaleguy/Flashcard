@@ -2,9 +2,13 @@ import "./Sidebar.scss";
 import { useState, useEffect } from "react";
 const { spawn } = require("child_process");
 
-const Sidebar = ({ _sidebarIsOpen }: { _sidebarIsOpen: any }) => {
-  const [currentDeck, setCurrentDeck] = useState({});
+const Sidebar = (props: any) => {
+  const [currentDeck, setCurrentDeck] = useState<Deck>({});
   const [selectedDeckIndex, setSelectedDeckIndex] = useState(-1);
+
+  interface Deck {
+    [key: string]: Array<Record<string, any>>;
+  }
 
   function executePythonScript(filePath: String) {
     return new Promise((resolve, reject) => {
@@ -39,9 +43,10 @@ const Sidebar = ({ _sidebarIsOpen }: { _sidebarIsOpen: any }) => {
       const filePath = event?.target?.files[0].path;
       executePythonScript(filePath)
         .then((jsonResult: any) => {
-          let deckInfo: any = JSON.parse(jsonResult);
+          let deckInfo: Deck = JSON.parse(jsonResult);
           setCurrentDeck(deckInfo);
           setSelectedDeckIndex(-1);
+          props.setSelectedSubdeck(null);
         })
         .catch((error) => console.error(error));
     } else {
@@ -49,19 +54,33 @@ const Sidebar = ({ _sidebarIsOpen }: { _sidebarIsOpen: any }) => {
     }
   };
 
+  const handleSubdeckSelection = (deckName: string, i: number) => {
+    setSelectedDeckIndex(i);
+    if (currentDeck !== undefined) {
+      let subDeck: any = { [deckName]: currentDeck[deckName] };
+      props.setSelectedSubdeck(subDeck);
+    }
+  };
+
   return (
-    <div className={`sidebar-container ${_sidebarIsOpen ? "open" : "close"}`}>
-      <div className={`sidebar-frame ${_sidebarIsOpen ? "open" : "close"}`}>
+    <div
+      className={`sidebar-container ${props._sidebarIsOpen ? "open" : "close"}`}
+    >
+      <div
+        className={`sidebar-frame ${props._sidebarIsOpen ? "open" : "close"}`}
+      >
         <div
-          className={`sidebar-frame-inner ${_sidebarIsOpen ? "open" : "close"}`}
+          className={`sidebar-frame-inner ${
+            props._sidebarIsOpen ? "open" : "close"
+          }`}
         >
-          {Object.keys(currentDeck).map((deckName, i) => {
+          {Object.keys(currentDeck as Deck).map((deckName, i) => {
             return (
               <div
                 className={`selectable-deck ${
                   selectedDeckIndex === i ? "selected-deck" : ""
                 }`}
-                onClick={() => setSelectedDeckIndex(i)}
+                onClick={() => handleSubdeckSelection(deckName, i)}
                 key={i}
               >
                 {deckName}
@@ -70,8 +89,10 @@ const Sidebar = ({ _sidebarIsOpen }: { _sidebarIsOpen: any }) => {
           })}
         </div>
       </div>
-      <label className={`import-btn ${_sidebarIsOpen ? "open" : "close"}`}>
-        {_sidebarIsOpen ? "Import Deck" : ""}
+      <label
+        className={`import-btn ${props._sidebarIsOpen ? "open" : "close"}`}
+      >
+        {props._sidebarIsOpen ? "Import Deck" : ""}
         <input
           type="file"
           style={{ display: "none" }}
