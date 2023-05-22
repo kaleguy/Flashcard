@@ -1,6 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import Modal from "../../modal/Modal";
 
 const Spash = (props: any) => {
+  const [isModalWindowOpen, setIsModalWindowOpen] = useState<boolean>(false);
+  const [selectedSubdeck, setSelectedSubdeck] = useState<any>(null);
+
+  useEffect(() => {
+    if (isModalWindowOpen) {
+      setSelectedSubdeck(props.subdeck[Object.keys(props.subdeck)[0]]);
+    }
+  }, [isModalWindowOpen, props.subdeck]);
+
   return (
     <div
       style={{
@@ -10,6 +20,14 @@ const Spash = (props: any) => {
         width: "100%",
       }}
     >
+      {isModalWindowOpen && selectedSubdeck && (
+        <Modal
+          requestClose={() => setIsModalWindowOpen(!isModalWindowOpen)}
+          quizQuestions={selectedSubdeck}
+          quizName={Object.keys(props.subdeck)[0]}
+        />
+      )}
+
       <h1>
         {props.subdeck === null
           ? "Import and select a deck to get started."
@@ -24,7 +42,15 @@ const Spash = (props: any) => {
               } cards.` /* OMG SO BAD SPAGHETTI FIX THISSS */
         }
       </p>
-      <button>Begin Practise</button>
+      <button
+        disabled={
+          props.subdeck == undefined ||
+          props.subdeck[Object.keys(props.subdeck)[0]].length == 0
+        }
+        onClick={() => setIsModalWindowOpen(true)}
+      >
+        Begin Practise
+      </button>
     </div>
   );
 };

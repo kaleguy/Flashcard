@@ -1,0 +1,57 @@
+$modal-height: 80vh;
+$modal-width: 80vw;
+
+.modal-bg {
+  background: rgba(0, 0, 0, 0.65);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.modal-fg {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 14px;
+  padding: 1rem;
+  width: $modal-width;
+  // I think I've messed something up so I have to do it like this
+  margin: calc((100vh - $modal-height) / 2) auto 0 auto;
+  height: $modal-height;
+}
+
+.container-title {
+  // This also contains the close button
+  display: flex;
+  flex-direction: row;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
+
+.close-button {
+  display: block;
+  margin-left: auto;
+  padding: 0.5rem 0.8rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.close-button:hover {
+  background: #f99;
+  outline: none;
+  color: #fff;
+}
