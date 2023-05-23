@@ -3,6 +3,7 @@ import zipfile
 import os
 import sqlite3
 import json
+import shutil
 
 def get_deck_ids():
     # Look at the `col` table, parse the json in the `decks` column, return deck id and deck name.
@@ -61,3 +62,4 @@ for deck_name, deck_info in get_deck_ids().items():
 conn.close()
 print(json.dumps(out, indent=4, separators=(","," : ")))
 # These were the most annoying few hours of my life <:-D works now so doesnt matter
+shutil.rmtree(extract_dir) # your storage space will thank me, mine certainly didn't 
