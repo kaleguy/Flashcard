@@ -20,6 +20,10 @@ a {
   text-decoration: inherit;
 }
 
+div:focus {
+  outline: none;
+}
+
 html {
   margin: 0;
   height: 100%;
