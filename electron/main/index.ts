@@ -55,7 +55,6 @@ async function createWindow() {
       // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
       nodeIntegration: true,
       contextIsolation: false,
-      devTools: true,
     },
   });
   win.removeMenu();
@@ -72,7 +71,6 @@ async function createWindow() {
   // Test actively push message to the Electron-Renderer
   win.webContents.on("did-finish-load", () => {
     win?.webContents.send("main-process-message", new Date().toLocaleString());
-    win?.webContents.openDevTools();
   });
 
   // Make all links open with the browser, not with the application

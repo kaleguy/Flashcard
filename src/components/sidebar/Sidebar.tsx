@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import "./Sidebar.scss";
-import { useState, useEffect } from "react";
 const { spawn } = require("child_process");
 
 const Sidebar = (props: any) => {
@@ -12,8 +12,7 @@ const Sidebar = (props: any) => {
 
   function executePythonScript(filePath: String) {
     return new Promise((resolve, reject) => {
-      const pythonProcess = spawn("python", [
-        "./src/utils/parseAnki.py",
+      const pythonProcess = spawn("./src/utils/parseAnki/parseAnki.exe", [
         filePath,
       ]);
 
