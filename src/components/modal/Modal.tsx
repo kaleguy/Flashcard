@@ -1,4 +1,4 @@
-import { useEffect, useState, KeyboardEvent } from "react";
+import { useEffect, useState, KeyboardEvent, useRef } from "react";
 import "./Modal.scss";
 
 interface Card {
@@ -11,29 +11,40 @@ const Modal = (props: any) => {
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
   const [card, setCard] = useState<Card>({ front: "", back: "" });
   const [isQuizCompleted, setIsQuizCompleted] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     switch (event.key) {
       case "1":
-        shuffleCard(3);
+        if (isAnswered) shuffleCard(3);
         break;
       case "2":
-        shuffleCard(6);
+        if (isAnswered) shuffleCard(6);
         break;
       case "3":
-        shuffleCard(9);
+        if (isAnswered) shuffleCard(9);
         break;
       case "4":
-        removeCardAndLoadNext();
+        if (isAnswered) removeCardAndLoadNext();
         break;
       case "Escape":
         props.requestClose();
         break;
       case " ":
-        setIsAnswered(true);
+        if (isAnswered) {
+          loadNextCard();
+        } else {
+          setIsAnswered(true);
+        }
         break;
     }
   };
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isAnswered]);
 
   useEffect(() => {
     if (props.quizQuestions.length > 0) {
@@ -102,25 +113,31 @@ const Modal = (props: any) => {
                     <br />
                   </>
                 )}
-                <div style={{ display: "flex", gap: "1rem" }}>
-                  <button className="red" onClick={() => shuffleCard(3)}>
-                    Again
-                  </button>
-                  <button className="orange" onClick={() => shuffleCard(6)}>
-                    Hard
-                  </button>
-                  <button className="yellow" onClick={() => shuffleCard(12)}>
-                    Okay
-                  </button>
-                  <button
-                    className="green"
-                    onClick={() => removeCardAndLoadNext()}
-                  >
-                    Known
-                  </button>
-                </div>
+                {isAnswered && (
+                  <div style={{ display: "flex", gap: "1rem" }}>
+                    <button className="red" onClick={() => shuffleCard(3)}>
+                      Again
+                    </button>
+                    <button className="orange" onClick={() => shuffleCard(6)}>
+                      Hard
+                    </button>
+                    <button className="yellow" onClick={() => shuffleCard(12)}>
+                      Okay
+                    </button>
+                    <button
+                      className="green"
+                      onClick={() => removeCardAndLoadNext()}
+                    >
+                      Known
+                    </button>
+                  </div>
+                )}
               </section>
-              <input autoFocus style={{ opacity: 0, width: 0, height: 0 }} />
+              <input
+                autoFocus
+                ref={inputRef}
+                style={{ opacity: 0, width: 0, height: 0 }}
+              />
             </>
           )}
           {isQuizCompleted && (
