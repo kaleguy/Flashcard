@@ -20,7 +20,7 @@ function App() {
               setSidebarIsOpen(!sidebarIsOpen);
             }}
           >
-            {sidebarIsOpen ? "<" : ">"}
+            {sidebarIsOpen ? "⬅" : "➡"}
           </button>
           <ViewPanel selectedSubdeck={selectedSubdeck} />
         </section>

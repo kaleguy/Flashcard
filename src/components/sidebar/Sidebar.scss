@@ -54,6 +54,7 @@ $primaryFont: "Fredoka", sans-serif;
   justify-content: center;
   align-items: center;
   height: 3rem;
+  cursor: pointer;
   background: linear-gradient(
     45deg,
     darken($backgroundColor, 4%),
@@ -66,6 +67,9 @@ $primaryFont: "Fredoka", sans-serif;
 
 .selectable-deck {
   padding: 0.5rem;
+  cursor: pointer;
+}
+.selectable-deck:hover {
 }
 .selected-deck {
   background: darken($backgroundColor, 10%);
