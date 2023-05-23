@@ -1,6 +1,11 @@
 $modal-height: 80vh;
 $modal-width: 80vw;
 
+$red: #ff3e3e;
+$orange: #ff9025;
+$yellow: #f6de3b;
+$green: #7de62b;
+
 .modal-bg {
   background: rgba(0, 0, 0, 0.65);
   position: fixed;
@@ -51,7 +56,42 @@ $modal-width: 80vw;
 }
 
 .close-button:hover {
-  background: #f99;
+  background: $red;
   outline: none;
   color: #fff;
+}
+
+.red {
+  color: #fff;
+  background-color: $red;
+}
+
+.red:hover {
+  background-color: $red;
+  filter: brightness(120%);
+}
+
+.orange {
+  color: #fff;
+  background: $orange;
+}
+.orange:hover {
+  background-color: $orange;
+  filter: brightness(120%);
+}
+.yellow {
+  color: #fff;
+  background: $yellow;
+}
+.yellow:hover {
+  background-color: $yellow;
+  filter: brightness(120%);
+}
+.green {
+  color: #fff;
+  background: $green;
+}
+.green:hover {
+  background-color: $green;
+  filter: brightness(120%);
 }
