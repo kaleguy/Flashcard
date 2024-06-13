@@ -25,6 +25,8 @@ release
 *.sln
 *.sw?
 
+src/utils/build
+
 #lockfile
 package-lock.json
 pnpm-lock.yaml
