@@ -44,6 +44,7 @@ const Sidebar = (props: any) => {
         .then((jsonResult: any) => {
           let deckInfo: Deck = JSON.parse(jsonResult);
           setCurrentDeck(deckInfo);
+          debugger;
           setSelectedDeckIndex(-1);
           props.setSelectedSubdeck(null);
         })

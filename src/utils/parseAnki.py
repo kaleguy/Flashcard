@@ -62,4 +62,4 @@ for deck_name, deck_info in get_deck_ids().items():
 conn.close()
 print(json.dumps(out, indent=4, separators=(","," : ")))
 # These were the most annoying few hours of my life <:-D works now so doesnt matter
-shutil.rmtree(extract_dir) # your storage space will thank me, mine certainly didn't 
+# shutil.rmtree(extract_dir) # your storage space will thank me, mine certainly didn't
